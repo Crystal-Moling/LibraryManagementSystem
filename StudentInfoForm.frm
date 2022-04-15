@@ -336,7 +336,6 @@ Private Sub Form_Load()
     End If
     CallText.Text = Trim(rec.Fields(7))
     IsInfoChanged = False
-    db.Close
 End Sub
 
 Private Sub Label7_Click()
@@ -361,20 +360,30 @@ Private Sub Picture2_Click()
             StudentInfoForm.Hide
             MenuForm.SetLoginUserID LoginUserID
             MenuForm.Show
+            db.Close
             Unload Me
         End If
     Else
         StudentInfoForm.Hide
         MenuForm.SetLoginUserID LoginUserID
         MenuForm.Show
+        db.Close
         Unload Me
     End If
 End Sub
 
 Private Sub Picture3_Click()
     rec.Fields(3) = Trim(StudentNameText.Text)
+    If SexMOption.Value Then
+        rec.Fields(4) = "ÄÐ"
+    ElseIf SexFOption.Value Then
+        rec Fields(4) = "Å®"
+    End If
     rec.Fields(5) = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
     rec Fields(6) = Trim(ClassText.Text)
+    rec.Fields(7) = Trim(CallText.Text)
+    rec.Update
+    IsInfoChanged = False
 End Sub
 
 Private Sub SignDay_LostFocus()
