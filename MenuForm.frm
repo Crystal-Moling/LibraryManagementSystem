@@ -141,5 +141,6 @@ Private Sub Picture2_Click()
     If MsgBox("确定要退出登录吗", vbOKCancel + vbQuestion, "提示") = vbOK Then
         MenuForm.Hide
         LoginForm.Show
+        Unload Me
     End If
 End Sub

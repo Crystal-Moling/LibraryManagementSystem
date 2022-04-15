@@ -15,10 +15,4 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Public Sub SetFormX(mX As Long, X As Single)
-    Move Me.Left - mX + X
-End Sub
-Public Sub SetFormY(mY As Long, Y As Single)
-    Move Me.Left, Me.Top - mY + Y
-End Sub
 

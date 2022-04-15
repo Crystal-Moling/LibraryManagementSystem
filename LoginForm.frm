@@ -90,7 +90,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim db As ADODB.Connection
-Dim mX As Long, mY As Long
 
 Private Sub ExitButton_Click()
     If MsgBox("确定要退出吗", vbOKCancel + vbQuestion, "注意") = vbOK Then
@@ -102,20 +101,6 @@ Private Sub Form_Load()
     Move 0, 0
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
-End Sub
-
-Private Sub Label3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button And vbLeftButton Then
-        mX = X
-        mY = Y
-    End If
-End Sub
-
-Private Sub Label3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button And vbLeftButton Then
-        MainForm.SetFormX mX, X
-        MainForm.SetFormY mY, Y
-    End If
 End Sub
 
 Private Sub LoginButton_Click()
@@ -140,6 +125,7 @@ Private Sub LoginButton_Click()
                     MenuForm.Show
                     'StudentInfoForm.Show
                     LoginForm.Hide
+                    Unload Me
                     db.Close
                 Else
                     MsgBox "用户名或密码错误", vbOKCancel + vbExclamation, "警告"
