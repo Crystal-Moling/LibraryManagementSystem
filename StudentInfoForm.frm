@@ -17,7 +17,7 @@ Begin VB.Form StudentInfoForm
       ScaleHeight     =   555
       ScaleWidth      =   2715
       TabIndex        =   18
-      Top             =   2400
+      Top             =   3000
       Width           =   2775
       Begin VB.Label Label8 
          Caption         =   "返回"
@@ -53,6 +53,41 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   2
       Top             =   1440
       Width           =   2775
+      Begin VB.PictureBox Picture3 
+         Height          =   615
+         Left            =   0
+         ScaleHeight     =   555
+         ScaleWidth      =   2715
+         TabIndex        =   20
+         Top             =   960
+         Width           =   2775
+         Begin VB.Label Label9 
+            Caption         =   "保存信息"
+            BeginProperty Font 
+               Name            =   "宋体"
+               Size            =   15.75
+               Charset         =   134
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   600
+            TabIndex        =   21
+            Top             =   120
+            Width           =   1335
+         End
+         Begin VB.Shape Shape3 
+            BackColor       =   &H00000000&
+            BackStyle       =   1  'Opaque
+            Height          =   375
+            Left            =   120
+            Shape           =   4  'Rounded Rectangle
+            Top             =   120
+            Width           =   375
+         End
+      End
       Begin VB.PictureBox Picture1 
          Height          =   615
          Left            =   0
@@ -118,7 +153,6 @@ Begin VB.Form StudentInfoForm
          List            =   "StudentInfoForm.frx":0028
          TabIndex        =   12
          TabStop         =   0   'False
-         Text            =   "1"
          Top             =   1920
          Width           =   615
       End
@@ -262,6 +296,7 @@ Attribute VB_Exposed = False
 Dim LoginUserID As String
 Dim IsInfoChanged As Boolean
 Dim db As ADODB.Connection
+Dim rec
 Public Sub SetLoginUserID(LUID As String)
     LoginUserID = LUID
 End Sub
@@ -283,6 +318,7 @@ Private Sub Form_Load()
     End If
     ClassText.Text = Trim(rec.Fields(6))
     SignDate = Trim(rec.Fields(5))
+    SignYear.Text = Left(SignDate, 4)
     If Mid(SignDate, 7, 1) = "/" Then
         SignMonth.Text = Mid(SignDate, 6, 1)
         If Mid(SignDate, 9, 1) = "" Then
@@ -298,8 +334,8 @@ Private Sub Form_Load()
             SignDay.Text = Right(SignDate, 2)
         End If
     End If
-    SignYear.Text = Left(SignDate, 4)
     CallText.Text = Trim(rec.Fields(7))
+    IsInfoChanged = False
     db.Close
 End Sub
 
@@ -309,6 +345,10 @@ End Sub
 
 Private Sub Label8_Click()
     Picture2_Click
+End Sub
+
+Private Sub Label9_Click()
+    Picture3_Click
 End Sub
 
 Private Sub Picture1_Click()
@@ -329,4 +369,44 @@ Private Sub Picture2_Click()
         MenuForm.Show
         Unload Me
     End If
+End Sub
+
+Private Sub Picture3_Click()
+    rec.Fields(3) = Trim(StudentNameText.Text)
+    rec.Fields(5) = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
+    rec Fields(6) = Trim(ClassText.Text)
+End Sub
+
+Private Sub SignDay_LostFocus()
+    IsInfoChanged = True
+End Sub
+
+Private Sub SignMonth_LostFocus()
+    IsInfoChanged = True
+    SignDay.Clear
+    If SignMonth.Text = "1" Or "3" Or "5" Or "7" Or "8" Or "10" Or "12" Then
+        For m = 1 To 31
+            SignDay.AddItem CStr(m)
+        Next m
+    ElseIf SignMonth.Text = "4" Or "6" Or "9" Or "11" Then
+        For m = 1 To 30
+            SignDay.AddItem CStr(m)
+        Next m
+    ElseIf SignMonth.Text = "2" Then
+        Dim year As Integer
+        year = Val(SignYear.Text)
+        If year Mod 4 = 0 And year Mod 100 <> 0 Or year Mod 400 = 0 Then
+            For m = 1 To 29
+                SignDay.AddItem CStr(m)
+            Next m
+        Else
+            For m = 1 To 28
+                SignDay.AddItem CStr(m)
+            Next m
+        End If
+    End If
+End Sub
+
+Private Sub SignYear_LostFocus()
+    IsInfoChanged = True
 End Sub

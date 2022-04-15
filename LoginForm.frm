@@ -123,7 +123,6 @@ Private Sub LoginButton_Click()
                     UsernameTextbox.Text = ""
                     PasswordTextbox.Text = ""
                     MenuForm.Show
-                    'StudentInfoForm.Show
                     LoginForm.Hide
                     Unload Me
                     db.Close
