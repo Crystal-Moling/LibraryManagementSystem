@@ -1,14 +1,24 @@
 VERSION 5.00
 Begin VB.Form StudentInfoForm 
+   BorderStyle     =   0  'None
    Caption         =   "图书借阅管理系统-学生信息"
-   ClientHeight    =   5805
-   ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   6345
+   ClientHeight    =   7215
+   ClientLeft      =   0
+   ClientTop       =   -15
+   ClientWidth     =   9765
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   5805
-   ScaleWidth      =   6345
+   ScaleHeight     =   7215
+   ScaleWidth      =   9765
+   ShowInTaskbar   =   0   'False
+   Begin VB.Label Label1 
+      BackColor       =   &H00FF8080&
+      Height          =   1215
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   9855
+   End
 End
 Attribute VB_Name = "StudentInfoForm"
 Attribute VB_GlobalNameSpace = False
@@ -19,3 +29,4 @@ Dim LoginUserID As String
 Public Sub SetLoginUserID(LUID As String)
     LoginUserID = LUID
 End Sub
+
