@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form LoginForm 
+   BackColor       =   &H00FFFFFF&
    BorderStyle     =   0  'None
    Caption         =   "登陆"
    ClientHeight    =   7215
@@ -14,71 +15,117 @@ Begin VB.Form LoginForm
    ShowInTaskbar   =   0   'False
    Begin VB.CommandButton ExitButton 
       Caption         =   "退出"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   4920
-      TabIndex        =   7
-      Top             =   4440
-      Width           =   735
+      Left            =   5400
+      TabIndex        =   6
+      Top             =   4680
+      Width           =   855
    End
    Begin VB.CommandButton LoginButton 
       Caption         =   "登陆"
       Default         =   -1  'True
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   3600
-      TabIndex        =   6
-      Top             =   4440
-      Width           =   735
+      TabIndex        =   5
+      Top             =   4680
+      Width           =   855
    End
    Begin VB.TextBox PasswordTextbox 
       Appearance      =   0  'Flat
-      Height          =   270
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   405
       IMEMode         =   3  'DISABLE
       Left            =   3960
       PasswordChar    =   "*"
-      TabIndex        =   5
-      Top             =   3960
-      Width           =   1575
+      TabIndex        =   4
+      Top             =   4080
+      Width           =   2175
    End
    Begin VB.TextBox UsernameTextbox 
       Appearance      =   0  'Flat
-      Height          =   270
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   405
       Left            =   3960
-      TabIndex        =   4
-      Top             =   3360
-      Width           =   1575
+      TabIndex        =   3
+      Top             =   3240
+      Width           =   2175
    End
    Begin VB.Label Label6 
       BackStyle       =   0  'Transparent
       Caption         =   "密码："
-      ForeColor       =   &H00FFFFFF&
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
       Height          =   255
       Left            =   3720
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   3720
-      Width           =   615
+      Width           =   855
    End
    Begin VB.Label Label5 
       BackStyle       =   0  'Transparent
       Caption         =   "用户名："
-      ForeColor       =   &H00FFFFFF&
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
       Height          =   255
       Left            =   3720
-      TabIndex        =   2
-      Top             =   3120
-      Width           =   735
-   End
-   Begin VB.Label Label4 
-      BackColor       =   &H00FF8080&
-      Height          =   5175
-      Left            =   0
       TabIndex        =   1
-      Top             =   2040
-      Width           =   9735
+      Top             =   2880
+      Width           =   975
    End
    Begin VB.Label Label3 
       BackColor       =   &H00FF8080&
       Height          =   1215
-      Left            =   0
+      Left            =   -120
       TabIndex        =   0
       Top             =   0
       Width           =   9855

@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form StudentInfoForm 
+   BackColor       =   &H00FFFFFF&
    BorderStyle     =   0  'None
    Caption         =   "图书借阅管理系统-学生信息"
    ClientHeight    =   7215
@@ -12,6 +13,7 @@ Begin VB.Form StudentInfoForm
    ScaleWidth      =   9765
    ShowInTaskbar   =   0   'False
    Begin VB.PictureBox Picture2 
+      BackColor       =   &H00FFFFFF&
       Height          =   615
       Left            =   6840
       ScaleHeight     =   555
@@ -20,6 +22,7 @@ Begin VB.Form StudentInfoForm
       Top             =   3000
       Width           =   2775
       Begin VB.Label Label8 
+         BackStyle       =   0  'Transparent
          Caption         =   "返回"
          BeginProperty Font 
             Name            =   "宋体"
@@ -47,6 +50,7 @@ Begin VB.Form StudentInfoForm
       End
    End
    Begin VB.Frame Frame2 
+      BackColor       =   &H00FFFFFF&
       Caption         =   "操作"
       Height          =   5655
       Left            =   6840
@@ -54,6 +58,7 @@ Begin VB.Form StudentInfoForm
       Top             =   1440
       Width           =   2775
       Begin VB.PictureBox Picture3 
+         BackColor       =   &H00FFFFFF&
          Height          =   615
          Left            =   0
          ScaleHeight     =   555
@@ -62,6 +67,7 @@ Begin VB.Form StudentInfoForm
          Top             =   960
          Width           =   2775
          Begin VB.Label Label9 
+            BackStyle       =   0  'Transparent
             Caption         =   "保存信息"
             BeginProperty Font 
                Name            =   "宋体"
@@ -89,6 +95,7 @@ Begin VB.Form StudentInfoForm
          End
       End
       Begin VB.PictureBox Picture1 
+         BackColor       =   &H00FFFFFF&
          Height          =   615
          Left            =   0
          ScaleHeight     =   555
@@ -97,6 +104,7 @@ Begin VB.Form StudentInfoForm
          Top             =   360
          Width           =   2775
          Begin VB.Label Label7 
+            BackStyle       =   0  'Transparent
             Caption         =   "修改信息"
             BeginProperty Font 
                Name            =   "宋体"
@@ -125,6 +133,7 @@ Begin VB.Form StudentInfoForm
       End
    End
    Begin VB.Frame Frame1 
+      BackColor       =   &H00FFFFFF&
       Caption         =   "个人信息"
       Enabled         =   0   'False
       Height          =   5655
@@ -164,6 +173,7 @@ Begin VB.Form StudentInfoForm
          Width           =   975
       End
       Begin VB.OptionButton SexFOption 
+         BackColor       =   &H00FFFFFF&
          Caption         =   "女"
          Height          =   255
          Left            =   1440
@@ -172,6 +182,7 @@ Begin VB.Form StudentInfoForm
          Width           =   495
       End
       Begin VB.OptionButton SexMOption 
+         BackColor       =   &H00FFFFFF&
          Caption         =   "男"
          Height          =   255
          Left            =   840
@@ -193,7 +204,41 @@ Begin VB.Form StudentInfoForm
          Top             =   480
          Width           =   1095
       End
+      Begin VB.Label Label13 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "不得多于或少于11个字符"
+         ForeColor       =   &H000000FF&
+         Height          =   180
+         Left            =   3360
+         TabIndex        =   24
+         Top             =   2400
+         Width           =   1980
+      End
+      Begin VB.Label Label11 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "*"
+         ForeColor       =   &H000000FF&
+         Height          =   180
+         Left            =   2040
+         TabIndex        =   23
+         Top             =   960
+         Width           =   90
+      End
+      Begin VB.Label Label10 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "* 不得多于14个字符"
+         ForeColor       =   &H000000FF&
+         Height          =   180
+         Left            =   2040
+         TabIndex        =   22
+         Top             =   480
+         Width           =   1620
+      End
       Begin VB.Label Label6 
+         BackStyle       =   0  'Transparent
          Caption         =   "联系电话："
          BeginProperty Font 
             Name            =   "宋体"
@@ -211,6 +256,7 @@ Begin VB.Form StudentInfoForm
          Width           =   975
       End
       Begin VB.Label Label5 
+         BackStyle       =   0  'Transparent
          Caption         =   "入学时间："
          BeginProperty Font 
             Name            =   "宋体"
@@ -228,6 +274,7 @@ Begin VB.Form StudentInfoForm
          Width           =   975
       End
       Begin VB.Label Label4 
+         BackStyle       =   0  'Transparent
          Caption         =   "性别："
          BeginProperty Font 
             Name            =   "宋体"
@@ -245,6 +292,7 @@ Begin VB.Form StudentInfoForm
          Width           =   615
       End
       Begin VB.Label Label3 
+         BackStyle       =   0  'Transparent
          Caption         =   "班级："
          BeginProperty Font 
             Name            =   "宋体"
@@ -262,6 +310,7 @@ Begin VB.Form StudentInfoForm
          Width           =   615
       End
       Begin VB.Label Label2 
+         BackStyle       =   0  'Transparent
          Caption         =   "姓名："
          BeginProperty Font 
             Name            =   "宋体"
@@ -383,10 +432,18 @@ End Sub
 Private Sub Picture3_Click()
     Dim gender As String
     Dim signDate As String
+    If StudentNameText.Text = "" Then
+        MsgBox "姓名不能为空", vbOKOnly + vbExclamation, "提示"
+    End If
     If SexMOption.Value Then
         gender = "男"
     ElseIf SexFOption.Value Then
         gender = "女"
+    Else
+        MsgBox "性别不能为空", vbOKOnly + vbExclamation, "提示"
+    End If
+    If Len(CallText.Text) <> 11 Then
+        MsgBox "电话格式错误", vbOKOnly + vbExclamation, "提示"
     End If
     signDate = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
     saveChangeSQL = "UPDATE 借阅者表 SET 姓名 = '" & Trim(StudentNameText.Text) & "', 性别 = '" & gender & "', 入学时间 = #" & signDate & "#, 班级 = '" & Trim(ClassText.Text) & "', 联系电话 = '" & Trim(CallText.Text) & "' WHERE 学生编号 = '" & LoginUserID & "'"
@@ -410,12 +467,10 @@ Private Sub SignDay_GetFocus()
     SignDay.Clear
     M0 = SignMonth.Text
     If M0 = "1" Or M0 = "3" Or M0 = "5" Or M0 = "7" Or M0 = "8" Or M0 = "10" Or M0 = "12" Then
-        MsgBox "是大月"
         For m = 1 To 31
             SignDay.AddItem CStr(m)
         Next m
     ElseIf M0 = "4" Or M0 = "6" Or M0 = "9" Or M0 = "11" Then
-        MsgBox "是小月"
         For m = 1 To 30
             SignDay.AddItem CStr(m)
         Next m
