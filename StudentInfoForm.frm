@@ -19,7 +19,7 @@ Begin VB.Form StudentInfoForm
       ScaleHeight     =   555
       ScaleWidth      =   2715
       TabIndex        =   18
-      Top             =   3000
+      Top             =   3600
       Width           =   2775
       Begin VB.Label Label8 
          BackStyle       =   0  'Transparent
@@ -57,6 +57,43 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   2
       Top             =   1440
       Width           =   2775
+      Begin VB.PictureBox Picture4 
+         BackColor       =   &H00FFFFFF&
+         Height          =   615
+         Left            =   0
+         ScaleHeight     =   555
+         ScaleWidth      =   2715
+         TabIndex        =   27
+         Top             =   960
+         Width           =   2775
+         Begin VB.Label Label14 
+            BackStyle       =   0  'Transparent
+            Caption         =   "修改密码"
+            BeginProperty Font 
+               Name            =   "宋体"
+               Size            =   15.75
+               Charset         =   134
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   600
+            TabIndex        =   28
+            Top             =   120
+            Width           =   1335
+         End
+         Begin VB.Shape Shape4 
+            BackColor       =   &H00000000&
+            BackStyle       =   1  'Opaque
+            Height          =   375
+            Left            =   120
+            Shape           =   4  'Rounded Rectangle
+            Top             =   120
+            Width           =   375
+         End
+      End
       Begin VB.PictureBox Picture3 
          BackColor       =   &H00FFFFFF&
          Height          =   615
@@ -64,7 +101,7 @@ Begin VB.Form StudentInfoForm
          ScaleHeight     =   555
          ScaleWidth      =   2715
          TabIndex        =   20
-         Top             =   960
+         Top             =   1560
          Width           =   2775
          Begin VB.Label Label9 
             BackStyle       =   0  'Transparent
@@ -141,18 +178,26 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   1
       Top             =   1440
       Width           =   6615
+      Begin VB.TextBox StudentNumberText 
+         Enabled         =   0   'False
+         Height          =   270
+         Left            =   1200
+         TabIndex        =   26
+         Top             =   960
+         Width           =   1455
+      End
       Begin VB.TextBox CallText 
          Height          =   270
          Left            =   1320
          TabIndex        =   15
-         Top             =   2400
+         Top             =   2880
          Width           =   1935
       End
       Begin VB.ComboBox SignDay 
          Height          =   300
          Left            =   3120
          TabIndex        =   13
-         Top             =   1920
+         Top             =   2400
          Width           =   615
       End
       Begin VB.ComboBox SignMonth 
@@ -162,14 +207,14 @@ Begin VB.Form StudentInfoForm
          List            =   "StudentInfoForm.frx":0028
          TabIndex        =   12
          TabStop         =   0   'False
-         Top             =   1920
+         Top             =   2400
          Width           =   615
       End
       Begin VB.ComboBox SignYear 
          Height          =   300
          Left            =   1320
          TabIndex        =   11
-         Top             =   1920
+         Top             =   2400
          Width           =   975
       End
       Begin VB.OptionButton SexFOption 
@@ -178,7 +223,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   1440
          TabIndex        =   9
-         Top             =   960
+         Top             =   1440
          Width           =   495
       End
       Begin VB.OptionButton SexMOption 
@@ -187,14 +232,14 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   840
          TabIndex        =   8
-         Top             =   960
+         Top             =   1440
          Width           =   495
       End
       Begin VB.TextBox ClassText 
          Height          =   270
          Left            =   840
          TabIndex        =   6
-         Top             =   1440
+         Top             =   1920
          Width           =   1095
       End
       Begin VB.TextBox StudentNameText 
@@ -202,7 +247,25 @@ Begin VB.Form StudentInfoForm
          Left            =   840
          TabIndex        =   4
          Top             =   480
-         Width           =   1095
+         Width           =   1815
+      End
+      Begin VB.Label Label12 
+         BackStyle       =   0  'Transparent
+         Caption         =   "学生编号："
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   9
+            Charset         =   134
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   240
+         TabIndex        =   25
+         Top             =   960
+         Width           =   975
       End
       Begin VB.Label Label13 
          AutoSize        =   -1  'True
@@ -212,7 +275,7 @@ Begin VB.Form StudentInfoForm
          Height          =   180
          Left            =   3360
          TabIndex        =   24
-         Top             =   2400
+         Top             =   2880
          Width           =   1980
       End
       Begin VB.Label Label11 
@@ -223,7 +286,7 @@ Begin VB.Form StudentInfoForm
          Height          =   180
          Left            =   2040
          TabIndex        =   23
-         Top             =   960
+         Top             =   1440
          Width           =   90
       End
       Begin VB.Label Label10 
@@ -232,7 +295,7 @@ Begin VB.Form StudentInfoForm
          Caption         =   "* 不得多于14个字符"
          ForeColor       =   &H000000FF&
          Height          =   180
-         Left            =   2040
+         Left            =   2760
          TabIndex        =   22
          Top             =   480
          Width           =   1620
@@ -252,7 +315,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   14
-         Top             =   2400
+         Top             =   2880
          Width           =   975
       End
       Begin VB.Label Label5 
@@ -270,7 +333,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   10
-         Top             =   1920
+         Top             =   2400
          Width           =   975
       End
       Begin VB.Label Label4 
@@ -288,7 +351,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   7
-         Top             =   960
+         Top             =   1440
          Width           =   615
       End
       Begin VB.Label Label3 
@@ -306,7 +369,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   5
-         Top             =   1440
+         Top             =   1920
          Width           =   615
       End
       Begin VB.Label Label2 
@@ -367,6 +430,7 @@ Private Sub Form_Load()
     Set rec = New ADODB.Recordset
     rec.Open Trim(getUserSQL), db
     Set ExecuteSQL = rec
+    StudentNumberText.Text = Trim(rec.Fields(0))
     StudentNameText.Text = Trim(rec.Fields(3))
     If Trim(rec.Fields(4)) = "男" Then
         SexMOption.Value = True
@@ -500,3 +564,4 @@ End Sub
 Private Sub StudentNameText_Change()
     IsInfoChanged = True
 End Sub
+
