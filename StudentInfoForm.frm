@@ -301,8 +301,16 @@ Public Sub SetLoginUserID(LUID As String)
     LoginUserID = LUID
 End Sub
 
+Private Sub CallText_Change()
+    IsInfoChanged = True
+End Sub
+
+Private Sub ClassText_Change()
+    IsInfoChanged = True
+End Sub
+
 Private Sub Form_Load()
-    Dim SignDate As String
+    Dim signDate As String
     Move 0, 0
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
@@ -317,21 +325,21 @@ Private Sub Form_Load()
         SexFOption.Value = True
     End If
     ClassText.Text = Trim(rec.Fields(6))
-    SignDate = Trim(rec.Fields(5))
-    SignYear.Text = Left(SignDate, 4)
-    If Mid(SignDate, 7, 1) = "/" Then
-        SignMonth.Text = Mid(SignDate, 6, 1)
-        If Mid(SignDate, 9, 1) = "" Then
-            SignDay.Text = Right(SignDate, 1)
+    signDate = Trim(rec.Fields(5))
+    SignYear.Text = Left(signDate, 4)
+    If Mid(signDate, 7, 1) = "/" Then
+        SignMonth.Text = Mid(signDate, 6, 1)
+        If Mid(signDate, 9, 1) = "" Then
+            SignDay.Text = Right(signDate, 1)
         Else
-            SignDay.Text = Right(SignDate, 2)
+            SignDay.Text = Right(signDate, 2)
         End If
     Else
-        SignMonth.Text = Mid(SignDate, 6, 2)
-        If Mid(SignDate, 10, 1) = "" Then
-            SignDay.Text = Right(SignDate, 1)
+        SignMonth.Text = Mid(signDate, 6, 2)
+        If Mid(signDate, 10, 1) = "" Then
+            SignDay.Text = Right(signDate, 1)
         Else
-            SignDay.Text = Right(SignDate, 2)
+            SignDay.Text = Right(signDate, 2)
         End If
     End If
     CallText.Text = Trim(rec.Fields(7))
@@ -373,35 +381,45 @@ Private Sub Picture2_Click()
 End Sub
 
 Private Sub Picture3_Click()
-    rec.Fields(3) = Trim(StudentNameText.Text)
+    Dim gender As String
+    Dim signDate As String
     If SexMOption.Value Then
-        rec.Fields(4) = "男"
+        gender = "男"
     ElseIf SexFOption.Value Then
-        rec Fields(4) = "女"
+        gender = "女"
     End If
-    rec.Fields(5) = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
-    rec Fields(6) = Trim(ClassText.Text)
-    rec.Fields(7) = Trim(CallText.Text)
-    rec.Update
+    signDate = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
+    saveChangeSQL = "UPDATE 借阅者表 SET 姓名 = '" & Trim(StudentNameText.Text) & "', 性别 = '" & gender & "', 入学时间 = #" & signDate & "#, 班级 = '" & Trim(ClassText.Text) & "', 联系电话 = '" & Trim(CallText.Text) & "' WHERE 学生编号 = '" & LoginUserID & "'"
+    db.Execute (saveChangeSQL)
     IsInfoChanged = False
 End Sub
 
-Private Sub SignDay_LostFocus()
+Private Sub SexFOption_Click()
     IsInfoChanged = True
 End Sub
 
-Private Sub SignMonth_LostFocus()
+Private Sub SexMOption_Click()
     IsInfoChanged = True
+End Sub
+
+Private Sub SignDay_Change()
+    IsInfoChanged = True
+End Sub
+
+Private Sub SignDay_GetFocus()
     SignDay.Clear
-    If SignMonth.Text = "1" Or "3" Or "5" Or "7" Or "8" Or "10" Or "12" Then
+    M0 = SignMonth.Text
+    If M0 = "1" Or M0 = "3" Or M0 = "5" Or M0 = "7" Or M0 = "8" Or M0 = "10" Or M0 = "12" Then
+        MsgBox "是大月"
         For m = 1 To 31
             SignDay.AddItem CStr(m)
         Next m
-    ElseIf SignMonth.Text = "4" Or "6" Or "9" Or "11" Then
+    ElseIf M0 = "4" Or M0 = "6" Or M0 = "9" Or M0 = "11" Then
+        MsgBox "是小月"
         For m = 1 To 30
             SignDay.AddItem CStr(m)
         Next m
-    ElseIf SignMonth.Text = "2" Then
+    ElseIf M0 = "2" Then
         Dim year As Integer
         year = Val(SignYear.Text)
         If year Mod 4 = 0 And year Mod 100 <> 0 Or year Mod 400 = 0 Then
@@ -416,6 +434,14 @@ Private Sub SignMonth_LostFocus()
     End If
 End Sub
 
-Private Sub SignYear_LostFocus()
+Private Sub SignMonth_Change()
+    IsInfoChanged = True
+End Sub
+
+Private Sub SignMonth_LostFocus()
+    SignDay_GetFocus
+End Sub
+
+Private Sub StudentNameText_Change()
     IsInfoChanged = True
 End Sub
