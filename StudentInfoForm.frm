@@ -459,6 +459,10 @@ Private Sub Form_Load()
     IsInfoChanged = False
 End Sub
 
+Private Sub Label14_Click()
+    Picture4_Click
+End Sub
+
 Private Sub Label7_Click()
     Picture1_Click
 End Sub
@@ -513,6 +517,13 @@ Private Sub Picture3_Click()
     saveChangeSQL = "UPDATE 借阅者表 SET 姓名 = '" & Trim(StudentNameText.Text) & "', 性别 = '" & gender & "', 入学时间 = #" & signDate & "#, 班级 = '" & Trim(ClassText.Text) & "', 联系电话 = '" & Trim(CallText.Text) & "' WHERE 学生编号 = '" & LoginUserID & "'"
     db.Execute (saveChangeSQL)
     IsInfoChanged = False
+End Sub
+
+Private Sub Picture4_Click()
+    PasswordChangeForm.SetLoginUserID LoginUserID
+    PasswordChangeForm.Show
+    StudentInfoForm.Hide
+    Unload Me
 End Sub
 
 Private Sub SexFOption_Click()
