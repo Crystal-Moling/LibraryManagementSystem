@@ -166,7 +166,7 @@ Private Sub LoginButton_Click()
                 UsernameTextbox.SetFocus
             Else
                 If Trim(rec.Fields(2)) = Trim(PasswordTextbox.Text) Then
-                    MenuForm.SetLoginUserID Trim(rec.Fields(0))
+                    MenuForm.SetLoginUserInfo Trim(rec.Fields(0)), rec.Fields(11)
                     UsernameTextbox.Text = ""
                     PasswordTextbox.Text = ""
                     MenuForm.Show

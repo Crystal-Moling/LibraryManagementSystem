@@ -115,12 +115,20 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserID As String
-Public Sub SetLoginUserID(LUID As String)
+Dim LoginUserPermission As Boolean
+Public Sub SetLoginUserInfo(LUID As String, LUP As Boolean)
     LoginUserID = LUID
+    LoginUserPermission = LUP
 End Sub
 
 Private Sub Form_Load()
     Move 0, 0
+    If LoginUserPermission Then
+        
+    Else
+        Picture2.Left = 3120
+        Picture2.Top = 2760
+    End If
 End Sub
 
 Private Sub Label3_Click()

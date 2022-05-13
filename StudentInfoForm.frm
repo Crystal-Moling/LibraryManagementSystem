@@ -178,12 +178,19 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   1
       Top             =   1440
       Width           =   6615
+      Begin VB.ComboBox StudentNumberCombo 
+         Height          =   300
+         Left            =   2880
+         TabIndex        =   29
+         Top             =   480
+         Width           =   1695
+      End
       Begin VB.TextBox StudentNumberText 
          Enabled         =   0   'False
          Height          =   270
          Left            =   1200
          TabIndex        =   26
-         Top             =   960
+         Top             =   480
          Width           =   1455
       End
       Begin VB.TextBox CallText 
@@ -246,7 +253,7 @@ Begin VB.Form StudentInfoForm
          Height          =   270
          Left            =   840
          TabIndex        =   4
-         Top             =   480
+         Top             =   960
          Width           =   1815
       End
       Begin VB.Label Label12 
@@ -264,7 +271,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   25
-         Top             =   960
+         Top             =   480
          Width           =   975
       End
       Begin VB.Label Label13 
@@ -297,7 +304,7 @@ Begin VB.Form StudentInfoForm
          Height          =   180
          Left            =   2760
          TabIndex        =   22
-         Top             =   480
+         Top             =   960
          Width           =   1620
       End
       Begin VB.Label Label6 
@@ -387,7 +394,7 @@ Begin VB.Form StudentInfoForm
          Height          =   255
          Left            =   240
          TabIndex        =   3
-         Top             =   480
+         Top             =   960
          Width           =   615
       End
    End
@@ -406,6 +413,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserID As String
+Dim LoginUserPermission As Boolean
 Dim IsInfoChanged As Boolean
 Dim db As ADODB.Connection
 Dim rec
@@ -457,6 +465,7 @@ Private Sub Form_Load()
     End If
     CallText.Text = Trim(rec.Fields(7))
     IsInfoChanged = False
+    Next i
 End Sub
 
 Private Sub Label14_Click()
@@ -483,14 +492,14 @@ Private Sub Picture2_Click()
     If IsInfoChanged Then
         If MsgBox("有未保存的更改，是否退出", vbOKCancel + vbExclamation, "提示") = vbOK Then
             StudentInfoForm.Hide
-            MenuForm.SetLoginUserID LoginUserID
+            MenuForm.SetLoginUserInfo LoginUserID, LoginUserPermission
             MenuForm.Show
             db.Close
             Unload Me
         End If
     Else
         StudentInfoForm.Hide
-        MenuForm.SetLoginUserID LoginUserID
+        MenuForm.SetLoginUserInfo LoginUserID, LoginUserPermission
         MenuForm.Show
         db.Close
         Unload Me
@@ -502,6 +511,8 @@ Private Sub Picture3_Click()
     Dim signDate As String
     If StudentNameText.Text = "" Then
         MsgBox "姓名不能为空", vbOKOnly + vbExclamation, "提示"
+    ElseIf Len(StudentNameText.Text) > 14 Then
+        MsgBox "姓名不合规", vbOKOnly + vbExclamation, "提示"
     End If
     If SexMOption.Value Then
         gender = "男"
@@ -569,6 +580,10 @@ Private Sub SignMonth_Change()
 End Sub
 
 Private Sub SignMonth_LostFocus()
+    SignDay_GetFocus
+End Sub
+
+Private Sub SignYear_Change()
     SignDay_GetFocus
 End Sub
 
