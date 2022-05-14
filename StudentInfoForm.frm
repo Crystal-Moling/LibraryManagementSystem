@@ -134,7 +134,7 @@ Begin VB.Form StudentInfoForm
    End
    Begin VB.Frame Frame1 
       BackColor       =   &H00FFFFFF&
-      Caption         =   "个人信息"
+      Caption         =   "学生信息"
       Height          =   5655
       Left            =   120
       TabIndex        =   1

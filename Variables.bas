@@ -7,14 +7,14 @@ Public Function SetLoginUserID(LUID As String)
 End Function
 
 Public Function SetLoginUserPermission(LUID As String)
-    LoginUserID = LUID
+    LoginUserPermission = LUID
 End Function
 
 Public Function GetLoginUserID() As String
     GetLoginUserID = LoginUserID
 End Function
 
-Public Function GetLoginUserPermission() As String
-    GetLoginUserPermission = LoginUserID
+Public Function GetLoginUserPermission() As Boolean
+    GetLoginUserPermission = LoginUserPermission
 End Function
 

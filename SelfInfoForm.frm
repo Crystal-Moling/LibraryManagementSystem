@@ -299,7 +299,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserID As String
 Private Sub Form_Load()
+
     LoginUserID = Variables.GetLoginUserID
+    
     Move 0, 0
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
@@ -333,13 +335,20 @@ Private Sub Form_Load()
         End If
     End If
     CallText.Text = Trim(rec.Fields(7))
-    IsInfoChanged = False
+    db.Close
+End Sub
+
+Private Sub Label14_Click()
+    Picture4_Click
+End Sub
+
+Private Sub Label8_Click()
+    Picture2_Click
 End Sub
 
 Private Sub Picture2_Click()
     StudentInfoForm.Hide
     MenuForm.Show
-    db.Close
     Unload Me
 End Sub
 

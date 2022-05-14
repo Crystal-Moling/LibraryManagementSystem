@@ -12,6 +12,46 @@ Begin VB.Form MenuForm
    ScaleHeight     =   7215
    ScaleWidth      =   9765
    ShowInTaskbar   =   0   'False
+   Begin VB.PictureBox Picture4 
+      BackColor       =   &H00FFFFFF&
+      Height          =   735
+      Left            =   3120
+      ScaleHeight     =   675
+      ScaleWidth      =   6555
+      TabIndex        =   8
+      Top             =   2760
+      Width           =   6615
+      Begin VB.Shape Shape4 
+         BackColor       =   &H00000000&
+         BackStyle       =   1  'Opaque
+         Height          =   495
+         Left            =   120
+         Shape           =   4  'Rounded Rectangle
+         Top             =   120
+         Width           =   495
+      End
+      Begin VB.Label Label6 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         Caption         =   "出版社管理"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   21.75
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   495
+         Left            =   840
+         TabIndex        =   9
+         Top             =   120
+         Width           =   2295
+      End
+   End
    Begin VB.PictureBox Picture3 
       BackColor       =   &H00FFFFFF&
       Height          =   735
@@ -60,7 +100,7 @@ Begin VB.Form MenuForm
       ScaleHeight     =   675
       ScaleWidth      =   6555
       TabIndex        =   3
-      Top             =   2760
+      Top             =   3480
       Width           =   6615
       Begin VB.Label Label4 
          Appearance      =   0  'Flat
@@ -179,6 +219,10 @@ Private Sub Label4_Click()
     Picture2_Click
 End Sub
 
+Private Sub Label5_Click()
+    Picture3_Click
+End Sub
+
 Private Sub Picture1_Click()
     StudentInfoForm.Show
     MenuForm.Hide
@@ -194,5 +238,10 @@ End Sub
 
 Private Sub Picture3_Click()
     SelfInfoForm.Show
+    MenuForm.Hide
+End Sub
+
+Private Sub Picture4_Click()
+    PublisherForm.Show
     MenuForm.Hide
 End Sub

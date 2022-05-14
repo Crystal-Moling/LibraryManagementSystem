@@ -10,6 +10,7 @@ Form=MenuForm.frm
 Form=PasswordChangeForm.frm
 Form=SelfInfoForm.frm
 Module=Variables; Variables.bas
+Form=PublisherForm.frm
 Startup="LoginForm"
 HelpFile=""
 ExeName32="图书借阅管理系统.exe"
