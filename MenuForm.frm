@@ -12,6 +12,47 @@ Begin VB.Form MenuForm
    ScaleHeight     =   7215
    ScaleWidth      =   9765
    ShowInTaskbar   =   0   'False
+   Begin VB.PictureBox Picture3 
+      BackColor       =   &H00FFFFFF&
+      Height          =   735
+      Left            =   3120
+      ScaleHeight     =   675
+      ScaleWidth      =   6555
+      TabIndex        =   6
+      Top             =   2040
+      Visible         =   0   'False
+      Width           =   6615
+      Begin VB.Shape Shape3 
+         BackColor       =   &H00000000&
+         BackStyle       =   1  'Opaque
+         Height          =   495
+         Left            =   120
+         Shape           =   4  'Rounded Rectangle
+         Top             =   120
+         Width           =   495
+      End
+      Begin VB.Label Label5 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         Caption         =   "个人信息"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   21.75
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   495
+         Left            =   840
+         TabIndex        =   7
+         Top             =   120
+         Width           =   1815
+      End
+   End
    Begin VB.PictureBox Picture2 
       BackColor       =   &H00FFFFFF&
       Height          =   735
@@ -60,12 +101,13 @@ Begin VB.Form MenuForm
       ScaleWidth      =   6555
       TabIndex        =   2
       Top             =   2040
+      Visible         =   0   'False
       Width           =   6615
       Begin VB.Label Label3 
          Appearance      =   0  'Flat
          BackColor       =   &H80000005&
          BackStyle       =   0  'Transparent
-         Caption         =   "个人信息"
+         Caption         =   "学生信息"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   21.75
@@ -114,20 +156,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim LoginUserID As String
-Dim LoginUserPermission As Boolean
-Public Sub SetLoginUserInfo(LUID As String, LUP As Boolean)
-    LoginUserID = LUID
-    LoginUserPermission = LUP
-End Sub
-
 Private Sub Form_Load()
     Move 0, 0
     If LoginUserPermission Then
-        
+        Picture3.Visible = False
+        Picture1.Visible = True
     Else
-        Picture2.Left = 3120
-        Picture2.Top = 2760
+        Picture1.Visible = False
+        Picture3.Visible = True
     End If
 End Sub
 
@@ -140,7 +176,6 @@ Private Sub Label4_Click()
 End Sub
 
 Private Sub Picture1_Click()
-    StudentInfoForm.SetLoginUserID Trim(LoginUserID)
     StudentInfoForm.Show
     MenuForm.Hide
 End Sub
@@ -151,4 +186,9 @@ Private Sub Picture2_Click()
         LoginForm.Show
         Unload Me
     End If
+End Sub
+
+Private Sub Picture3_Click()
+    SelfInfoForm.Show
+    MenuForm.Hide
 End Sub

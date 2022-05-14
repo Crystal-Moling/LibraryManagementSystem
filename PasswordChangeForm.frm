@@ -178,9 +178,6 @@ Dim LoginUserID As String
 Dim IsInfoChanged As Boolean
 Dim db As ADODB.Connection
 Dim rec
-Public Sub SetLoginUserID(LUID As String)
-    LoginUserID = LUID
-End Sub
 
 Private Sub Command1_Click()
     If OldPasswordText.Text = "" Then
@@ -203,13 +200,15 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-    StudentInfoForm.SetLoginUserID LoginUserID
-    StudentInfoForm.Show
+    SelfInfoForm.Show
     PasswordChangeForm.Hide
     Unload Me
 End Sub
 
 Private Sub Form_Load()
+
+    LoginUserID = Variables.GetLoginUserID
+
     Move 0, 0
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
