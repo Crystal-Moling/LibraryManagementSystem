@@ -405,10 +405,6 @@ Private Sub Form_Load()
     Wend
 End Sub
 
-Private Sub Label14_Click()
-    Picture4_Click
-End Sub
-
 Private Sub Label7_Click()
     Picture1_Click
 End Sub
