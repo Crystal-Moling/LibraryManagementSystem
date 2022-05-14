@@ -19,7 +19,7 @@ Begin VB.Form StudentInfoForm
       ScaleHeight     =   555
       ScaleWidth      =   2715
       TabIndex        =   16
-      Top             =   2280
+      Top             =   2880
       Width           =   2775
       Begin VB.Label Label8 
          BackStyle       =   0  'Transparent
@@ -57,6 +57,43 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   2
       Top             =   1440
       Width           =   2775
+      Begin VB.PictureBox Picture1 
+         BackColor       =   &H00FFFFFF&
+         Height          =   615
+         Left            =   0
+         ScaleHeight     =   555
+         ScaleWidth      =   2715
+         TabIndex        =   25
+         Top             =   840
+         Width           =   2775
+         Begin VB.Shape Shape1 
+            BackColor       =   &H00000000&
+            BackStyle       =   1  'Opaque
+            Height          =   375
+            Left            =   120
+            Shape           =   4  'Rounded Rectangle
+            Top             =   120
+            Width           =   375
+         End
+         Begin VB.Label Label7 
+            BackStyle       =   0  'Transparent
+            Caption         =   "新建信息"
+            BeginProperty Font 
+               Name            =   "宋体"
+               Size            =   15.75
+               Charset         =   134
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   600
+            TabIndex        =   26
+            Top             =   120
+            Width           =   1335
+         End
+      End
       Begin VB.PictureBox Picture3 
          BackColor       =   &H00FFFFFF&
          Height          =   615
@@ -103,6 +140,14 @@ Begin VB.Form StudentInfoForm
       TabIndex        =   1
       Top             =   1440
       Width           =   6615
+      Begin VB.TextBox NewStudentInfoText 
+         Height          =   270
+         Left            =   1200
+         TabIndex        =   27
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   1695
+      End
       Begin VB.ComboBox StudentNumberCombo 
          Height          =   300
          Left            =   1200
@@ -376,6 +421,21 @@ Private Sub Label9_Click()
     Picture3_Click
 End Sub
 
+
+Private Sub NewStudentInfoText_Change()
+    StudentNumberCombo.Text = NewStudentInfoText.Text
+End Sub
+
+Private Sub Picture1_Click()
+    NewStudentInfoText.Visible = True
+    StudentNumberCombo.Visible = False
+    StudentNameText.Text = ""
+    SexMOption.Value = False
+    SexFOption.Value = False
+    ClassText.Text = ""
+    CallText.Text = ""
+    IsInfoChanged = True
+End Sub
 
 Private Sub Picture2_Click()
     If IsInfoChanged Then

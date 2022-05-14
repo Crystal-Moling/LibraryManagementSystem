@@ -156,7 +156,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Dim LoginUserPermission As Boolean
 Private Sub Form_Load()
+
+    LoginUserPermission = Variables.GetLoginUserPermission
+
     Move 0, 0
     If LoginUserPermission Then
         Picture3.Visible = False
