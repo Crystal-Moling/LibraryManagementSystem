@@ -376,6 +376,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserPermission As Boolean
 Dim IsInfoChanged As Boolean
+Dim IsNewInfo As Boolean
 Dim db As ADODB.Connection
 Dim rec
 
@@ -431,6 +432,7 @@ Private Sub Picture1_Click()
     ClassText.Text = ""
     CallText.Text = ""
     IsInfoChanged = True
+    IsNewInfo = True
 End Sub
 
 Private Sub Picture2_Click()
@@ -452,10 +454,23 @@ End Sub
 Private Sub Picture3_Click()
     Dim gender As String
     Dim signDate As String
+    If IsNewInfo Then
+        If NewStudentInfoText.Text = "" Then
+            MsgBox "编号不能为空", vbOKOnly + vbExclamation, "提示"
+            Exit Sub
+        End If
+    Else
+        If StudentNumberCombo.Text = "" Then
+            MsgBox "编号不能为空", vbOKOnly + vbExclamation, "提示"
+            Exit Sub
+        End If
+    End If
     If StudentNameText.Text = "" Then
         MsgBox "姓名不能为空", vbOKOnly + vbExclamation, "提示"
+        Exit Sub
     ElseIf Len(StudentNameText.Text) > 14 Then
         MsgBox "姓名不合规", vbOKOnly + vbExclamation, "提示"
+        Exit Sub
     End If
     If SexMOption.Value Then
         gender = "男"
@@ -463,12 +478,19 @@ Private Sub Picture3_Click()
         gender = "女"
     Else
         MsgBox "性别不能为空", vbOKOnly + vbExclamation, "提示"
+        Exit Sub
     End If
     If Len(CallText.Text) <> 11 Then
         MsgBox "电话格式错误", vbOKOnly + vbExclamation, "提示"
+        Exit Sub
     End If
     signDate = Trim(SignYear.Text) & "/" & Trim(SignMonth.Text) & "/" & Trim(SignDay.Text)
-    saveChangeSQL = "UPDATE 借阅者表 SET 姓名 = '" & Trim(StudentNameText.Text) & "', 性别 = '" & gender & "', 入学时间 = #" & signDate & "#, 班级 = '" & Trim(ClassText.Text) & "', 联系电话 = '" & Trim(CallText.Text) & "' WHERE 学生编号 = '" & LoginUserID & "'"
+    Dim saveChangeSQL As String
+    If IsNewInfo Then
+        saveChangeSQL = "INSERT INTO 借阅者表 (学生编号, 姓名, 性别, 入学时间, 班级, 联系电话) VALUES (" & Trim(StudentNumberCombo.Text) & ", " & Trim(StudentNameText.Text) & ", " & gender & ", #" & signDate & "#, " & Trim(ClassText.Text) & ", " & Trim(CallText.Text) & ")"
+    Else
+        saveChangeSQL = "UPDATE 借阅者表 SET 学生编号 = '" & Trim(StudentNumberCombo.Text) & "', 姓名 = '" & Trim(StudentNameText.Text) & "', 性别 = '" & gender & "', 入学时间 = #" & signDate & "#, 班级 = '" & Trim(ClassText.Text) & "', 联系电话 = '" & Trim(CallText.Text) & "' WHERE 学生编号 = '" & LoginUserID & "'"
+    End If
     db.Execute (saveChangeSQL)
     IsInfoChanged = False
 End Sub
@@ -540,24 +562,26 @@ Private Sub StudentNumberCombo_LostFocus()
     ElseIf Trim(rec.Fields(4)) = "女" Then
         SexFOption.Value = True
     End If
-    ClassText.Text = Trim(rec.Fields(6))
-    signDate = Trim(rec.Fields(5))
-    SignYear.Text = Left(signDate, 4)
-    If Mid(signDate, 7, 1) = "/" Then
-        SignMonth.Text = Mid(signDate, 6, 1)
-        If Mid(signDate, 9, 1) = "" Then
-            SignDay.Text = Right(signDate, 1)
+    If Trim(rec.Fields(6)) <> "" Then ClassText.Text = Trim(rec.Fields(6))
+    If Trim(rec.Fields(5)) <> "" Then
+        signDate = Trim(rec.Fields(5))
+        SignYear.Text = Left(signDate, 4)
+        If Mid(signDate, 7, 1) = "/" Then
+            SignMonth.Text = Mid(signDate, 6, 1)
+            If Mid(signDate, 9, 1) = "" Then
+                SignDay.Text = Right(signDate, 1)
+            Else
+                SignDay.Text = Right(signDate, 2)
+            End If
         Else
-            SignDay.Text = Right(signDate, 2)
-        End If
-    Else
-        SignMonth.Text = Mid(signDate, 6, 2)
-        If Mid(signDate, 10, 1) = "" Then
-            SignDay.Text = Right(signDate, 1)
-        Else
-            SignDay.Text = Right(signDate, 2)
+            SignMonth.Text = Mid(signDate, 6, 2)
+            If Mid(signDate, 10, 1) = "" Then
+                SignDay.Text = Right(signDate, 1)
+            Else
+                SignDay.Text = Right(signDate, 2)
+            End If
         End If
     End If
-    CallText.Text = Trim(rec.Fields(7))
+    If Trim(rec.Fields(7)) <> "" Then CallText.Text = Trim(rec.Fields(7))
     IsInfoChanged = False
 End Sub
