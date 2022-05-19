@@ -167,7 +167,11 @@ Private Sub LoginButton_Click()
             Else
                 If Trim(rec.Fields(2)) = Trim(PasswordTextbox.Text) Then
                     Variables.SetLoginUserID Trim(rec.Fields(0))
-                    Variables.SetLoginUserPermission rec.Fields(11)
+                    If rec.Fields(11) = "True" Then
+                        Variables.SetLoginUserPermission True
+                    Else
+                        Variables.SetLoginUserPermission False
+                    End If
                     UsernameTextbox.Text = ""
                     PasswordTextbox.Text = ""
                     MenuForm.Show

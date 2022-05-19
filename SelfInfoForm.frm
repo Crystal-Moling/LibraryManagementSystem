@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form SelfInfoForm 
+   BackColor       =   &H00FFFFFF&
    BorderStyle     =   0  'None
    Caption         =   "Form1"
    ClientHeight    =   7215
@@ -144,9 +145,7 @@ Begin VB.Form SelfInfoForm
       End
       Begin VB.ComboBox SignMonth 
          Height          =   300
-         ItemData        =   "SelfInfoForm.frx":0000
          Left            =   2400
-         List            =   "SelfInfoForm.frx":0028
          TabIndex        =   5
          TabStop         =   0   'False
          Top             =   2400
@@ -167,7 +166,6 @@ Begin VB.Form SelfInfoForm
          Width           =   1935
       End
       Begin VB.TextBox StudentNumberText 
-         Enabled         =   0   'False
          Height          =   270
          Left            =   1200
          TabIndex        =   2
@@ -303,6 +301,9 @@ Private Sub Form_Load()
     LoginUserID = Variables.GetLoginUserID
     
     Move 0, 0
+    For i = 1 To 12
+        SignMonth.AddItem i
+    Next i
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getUserSQL = "SELECT * FROM 借阅者表 WHERE 学生编号 = '" & LoginUserID & "'"

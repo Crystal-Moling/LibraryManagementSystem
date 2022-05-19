@@ -171,9 +171,7 @@ Begin VB.Form StudentInfoForm
       End
       Begin VB.ComboBox SignMonth 
          Height          =   300
-         ItemData        =   "StudentInfoForm.frx":0000
          Left            =   2400
-         List            =   "StudentInfoForm.frx":0028
          TabIndex        =   12
          TabStop         =   0   'False
          Top             =   2400
@@ -394,6 +392,9 @@ Private Sub Form_Load()
 
     Dim signDate As String
     Move 0, 0
+    For i = 1 To 12
+        SignMonth.AddItem i
+    Next i
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getNumberSQL = "SELECT 学生编号 FROM 借阅者表 WHERE 管理员 <> True"
@@ -507,7 +508,7 @@ Private Sub SignDay_Change()
     IsInfoChanged = True
 End Sub
 
-Private Sub SignDay_GetFocus()
+Private Sub SignDay_Click()
     SignDay.Clear
     M0 = SignMonth.Text
     If M0 = "1" Or M0 = "3" Or M0 = "5" Or M0 = "7" Or M0 = "8" Or M0 = "10" Or M0 = "12" Then
@@ -537,19 +538,11 @@ Private Sub SignMonth_Change()
     IsInfoChanged = True
 End Sub
 
-Private Sub SignMonth_LostFocus()
-    SignDay_GetFocus
-End Sub
-
-Private Sub SignYear_Change()
-    SignDay_GetFocus
-End Sub
-
 Private Sub StudentNameText_Change()
     IsInfoChanged = True
 End Sub
 
-Private Sub StudentNumberCombo_LostFocus()
+Private Sub StudentNumberCombo_Click()
     Set db = New ADODB.Connection
     db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getUserSQL = "SELECT * FROM 借阅者表 WHERE 学生编号 = '" & StudentNumberCombo.Text & "'"

@@ -6,8 +6,8 @@ Public Function SetLoginUserID(LUID As String)
     LoginUserID = LUID
 End Function
 
-Public Function SetLoginUserPermission(LUID As String)
-    LoginUserPermission = LUID
+Public Function SetLoginUserPermission(Permission As Boolean)
+    LoginUserPermission = Permission
 End Function
 
 Public Function GetLoginUserID() As String

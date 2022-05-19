@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form PublisherForm 
+   BackColor       =   &H00FFFFFF&
    BorderStyle     =   0  'None
    Caption         =   "Form1"
    ClientHeight    =   7215
@@ -377,7 +378,7 @@ Private Sub PublisherNameCombo_Change()
     IsInfoChanged = True
 End Sub
 
-Private Sub PublisherNameCombo_LostFocus()
+Private Sub PublisherNameCombo_Click()
     getPublisherSQL = "SELECT * FROM 出版社表 WHERE 出版社名称 = '" & PublisherNameCombo.Text & "'"
     Set rec = New ADODB.Recordset
     rec.Open Trim(getPublisherSQL), db

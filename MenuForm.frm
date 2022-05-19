@@ -274,6 +274,8 @@ End Sub
 
 Private Sub Picture2_Click()
     If MsgBox("确定要退出登录吗", vbOKCancel + vbQuestion, "提示") = vbOK Then
+        Variables.SetLoginUserID ""
+        Variables.SetLoginUserPermission False
         MenuForm.Hide
         LoginForm.Show
         Unload Me
