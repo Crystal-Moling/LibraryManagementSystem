@@ -245,9 +245,15 @@ Private Sub Form_Load()
     If LoginUserPermission Then
         Picture3.Visible = False
         Picture1.Visible = True
+        Picture5.Visible = True
+        Picture4.Visible = True
+        Picture2.Top = 4200
     Else
-        Picture1.Visible = False
         Picture3.Visible = True
+        Picture1.Visible = False
+        Picture5.Visible = False
+        Picture4.Visible = False
+        Picture2.Top = 2760
     End If
 End Sub
 
