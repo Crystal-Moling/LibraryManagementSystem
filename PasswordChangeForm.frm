@@ -175,8 +175,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserID As String
-Dim IsInfoChanged As Boolean
-Dim db As ADODB.Connection
 Dim rec
 
 Private Sub Command1_Click()
@@ -189,7 +187,7 @@ Private Sub Command1_Click()
             MsgBox "新密码不能与原密码一致", vbOKOnly + vbExclamation, "提示"
         ElseIf VerifyPasswordText.Text = NewPasswordText.Text Then
             setPasswordSQL = "UPDATE 借阅者表 SET 密码 = '" & NewPasswordText.Text & "' WHERE 学生编号 = '" & LoginUserID & "'"
-            db.Execute (setPasswordSQL)
+            SQL.Execute (setPasswordSQL)
             MsgBox "修改完成", vbOKOnly + vbInformation, "提示"
         Else
             MsgBox "两次密码不一致", vbOKOnly + vbExclamation, "提示"
@@ -210,10 +208,6 @@ Private Sub Form_Load()
     LoginUserID = Variables.GetLoginUserID
 
     Move 0, 0
-    Set db = New ADODB.Connection
-    db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getUserSQL = "SELECT * FROM 借阅者表 WHERE 学生编号 = '" & LoginUserID & "'"
-    Set rec = New ADODB.Recordset
-    rec.Open Trim(getUserSQL), db
-    Set ExecuteSQL = rec
+    Set rec = SQL.Execute(getUserSQL)
 End Sub

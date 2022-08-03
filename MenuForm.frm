@@ -12,7 +12,89 @@ Begin VB.Form MenuForm
    ScaleHeight     =   7215
    ScaleWidth      =   9765
    ShowInTaskbar   =   0   'False
-   Begin VB.PictureBox Picture5 
+   Begin VB.PictureBox ReturnBook 
+      BackColor       =   &H00FFFFFF&
+      Height          =   735
+      Left            =   3120
+      ScaleHeight     =   675
+      ScaleWidth      =   6555
+      TabIndex        =   14
+      Top             =   3480
+      Visible         =   0   'False
+      Width           =   6615
+      Begin VB.Shape Shape7 
+         BackColor       =   &H00000000&
+         BackStyle       =   1  'Opaque
+         Height          =   495
+         Left            =   120
+         Shape           =   4  'Rounded Rectangle
+         Top             =   120
+         Width           =   495
+      End
+      Begin VB.Label Label9 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         Caption         =   "图书归还"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   21.75
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   495
+         Left            =   840
+         TabIndex        =   15
+         Top             =   120
+         Width           =   1815
+      End
+   End
+   Begin VB.PictureBox BooksList 
+      BackColor       =   &H00FFFFFF&
+      Height          =   735
+      Left            =   3120
+      ScaleHeight     =   675
+      ScaleWidth      =   6555
+      TabIndex        =   12
+      Top             =   2760
+      Visible         =   0   'False
+      Width           =   6615
+      Begin VB.Label Label8 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BackStyle       =   0  'Transparent
+         Caption         =   "图书列表"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   21.75
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   495
+         Left            =   840
+         TabIndex        =   13
+         Top             =   120
+         Width           =   1815
+      End
+      Begin VB.Shape Shape6 
+         BackColor       =   &H00000000&
+         BackStyle       =   1  'Opaque
+         Height          =   495
+         Left            =   120
+         Shape           =   4  'Rounded Rectangle
+         Top             =   120
+         Width           =   495
+      End
+   End
+   Begin VB.PictureBox BooksInfo 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -52,7 +134,7 @@ Begin VB.Form MenuForm
          Width           =   495
       End
    End
-   Begin VB.PictureBox Picture4 
+   Begin VB.PictureBox PublisherInfo 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -92,7 +174,7 @@ Begin VB.Form MenuForm
          Width           =   2295
       End
    End
-   Begin VB.PictureBox Picture3 
+   Begin VB.PictureBox PersonalInfo 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -133,7 +215,7 @@ Begin VB.Form MenuForm
          Width           =   1815
       End
    End
-   Begin VB.PictureBox Picture2 
+   Begin VB.PictureBox LogOut 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -173,7 +255,7 @@ Begin VB.Form MenuForm
          Width           =   495
       End
    End
-   Begin VB.PictureBox Picture1 
+   Begin VB.PictureBox ReaderInfo 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -187,7 +269,7 @@ Begin VB.Form MenuForm
          Appearance      =   0  'Flat
          BackColor       =   &H80000005&
          BackStyle       =   0  'Transparent
-         Caption         =   "学生信息"
+         Caption         =   "借阅者信息"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   21.75
@@ -202,7 +284,7 @@ Begin VB.Form MenuForm
          Left            =   840
          TabIndex        =   4
          Top             =   120
-         Width           =   1815
+         Width           =   2175
       End
       Begin VB.Shape Shape1 
          BackColor       =   &H00000000&
@@ -237,68 +319,105 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim LoginUserPermission As Boolean
+
 Private Sub Form_Load()
 
     LoginUserPermission = Variables.GetLoginUserPermission
 
     Move 0, 0
     If LoginUserPermission Then
-        Picture3.Visible = False
-        Picture1.Visible = True
-        Picture5.Visible = True
-        Picture4.Visible = True
-        Picture2.Top = 4200
+        PersonalInfo.Visible = False
+        BooksList.Visible = False
+        ReturnBook.Visible = False
+        
+        ReaderInfo.Visible = True
+        BooksInfo.Visible = True
+        PublisherInfo.Visible = True
     Else
-        Picture3.Visible = True
-        Picture1.Visible = False
-        Picture5.Visible = False
-        Picture4.Visible = False
-        Picture2.Top = 2760
+        PersonalInfo.Visible = True
+        BooksList.Visible = True
+        ReturnBook.Visible = True
+        
+        ReaderInfo.Visible = False
+        BooksInfo.Visible = False
+        PublisherInfo.Visible = False
     End If
 End Sub
 
-Private Sub Label3_Click()
-    Picture1_Click
-End Sub
+' Admins menu start
 
-Private Sub Label4_Click()
-    Picture2_Click
-End Sub
+    '' Reader Info
+    
+        Private Sub ReaderInfo_Click()
+            StudentInfoForm.Show
+            MenuForm.Hide
+        End Sub
+        Private Sub Label3_Click()
+            ReaderInfo_Click
+        End Sub
+    
+    '' Publisher Info
+    
+        Private Sub PublisherInfo_Click()
+            PublisherForm.Show
+            MenuForm.Hide
+        End Sub
+        Private Sub Label6_Click()
+            PublisherInfo_Click
+        End Sub
+    
+    '' Books Info
+    
+        Private Sub BooksInfo_Click()
+            BookListForm.Show
+            MenuForm.Hide
+        End Sub
+        Private Sub Label7_Click()
+            BooksInfo_Click
+        End Sub
+' Admins menu end
 
-Private Sub Label5_Click()
-    Picture3_Click
-End Sub
+' Users menu start
 
-Private Sub Label7_Click()
-    Picture5_Click
-End Sub
+    '' Personal Info
+    
+        Private Sub PersonalInfo_Click()
+            SelfInfoForm.Show
+            MenuForm.Hide
+        End Sub
+        Private Sub Label5_Click()
+            PersonalInfo_Click
+        End Sub
+    
+    '' Return book
+    
+        Private Sub ReturnBook_Click()
+        
+        End Sub
+        Private Sub Label9_Click()
+            ReturnBook_Click
+        End Sub
+    
+    '' Books list
+    
+        Private Sub BooksList_Click()
+        
+        End Sub
+        Private Sub Label8_Click()
+            BooksList_Click
+        End Sub
+' Users menu end
 
-Private Sub Picture1_Click()
-    StudentInfoForm.Show
-    MenuForm.Hide
-End Sub
-
-Private Sub Picture2_Click()
-    If MsgBox("确定要退出登录吗", vbOKCancel + vbQuestion, "提示") = vbOK Then
-        Variables.SetLoginUserID ""
-        Variables.SetLoginUserPermission False
-        MenuForm.Hide
-        LoginForm.Show
-        Unload Me
-    End If
-End Sub
-
-Private Sub Picture3_Click()
-    SelfInfoForm.Show
-    MenuForm.Hide
-End Sub
-
-Private Sub Picture4_Click()
-    PublisherForm.Show
-    MenuForm.Hide
-End Sub
-
-Private Sub Picture5_Click()
-    BookListForm.Show
-    MenuForm.Hide
-End Sub
+' Logout
+    Private Sub LogOut_Click()
+        If MsgBox("确定要退出登录吗", vbOKCancel + vbQuestion, "提示") = vbOK Then
+            Variables.SetLoginUserID ""
+            Variables.SetLoginUserPermission False
+            MenuForm.Hide
+            LoginForm.Show
+            Unload Me
+        End If
+    End Sub
+    Private Sub Label4_Click()
+        LogOut_Click
+    End Sub

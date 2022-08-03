@@ -136,8 +136,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim db As ADODB.Connection
-
 Private Sub ExitButton_Click()
     If MsgBox("确定要退出吗", vbOKCancel + vbQuestion, "注意") = vbOK Then
         End
@@ -146,8 +144,6 @@ End Sub
 
 Private Sub Form_Load()
     Move 0, 0
-    Set db = New ADODB.Connection
-    db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
 End Sub
 
 Private Sub LoginButton_Click()
@@ -158,9 +154,7 @@ Private Sub LoginButton_Click()
             MsgBox "请输入密码", vbExclamation + vbOKOnly, "警告"
         Else
             getUserSQL = "SELECT * FROM 借阅者表 WHERE 用户名 = '" & UsernameTextbox.Text & "'"
-            Set rec = New ADODB.Recordset
-            rec.Open Trim(getUserSQL), db
-            Set ExecuteSQL = rec
+            Set rec = SQL.Execute(getUserSQL)
             If rec.EOF Then
                 MsgBox "用户名或密码错误", vbOKCancel + vbExclamation, "警告"
                 UsernameTextbox.SetFocus
@@ -177,7 +171,6 @@ Private Sub LoginButton_Click()
                     MenuForm.Show
                     LoginForm.Hide
                     Unload Me
-                    db.Close
                 Else
                     MsgBox "用户名或密码错误", vbOKCancel + vbExclamation, "警告"
                 End If

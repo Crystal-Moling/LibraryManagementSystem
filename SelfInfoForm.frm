@@ -304,12 +304,10 @@ Private Sub Form_Load()
     For i = 1 To 12
         SignMonth.AddItem i
     Next i
-    Set db = New ADODB.Connection
-    db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
+    
     getUserSQL = "SELECT * FROM 借阅者表 WHERE 学生编号 = '" & LoginUserID & "'"
-    Set rec = New ADODB.Recordset
-    rec.Open Trim(getUserSQL), db
-    Set ExecuteSQL = rec
+    Set rec = SQL.Execute(getUserSQL)
+    
     StudentNumberText.Text = Trim(rec.Fields(0))
     StudentNameText.Text = Trim(rec.Fields(3))
     If Trim(rec.Fields(4)) = "男" Then
@@ -336,7 +334,6 @@ Private Sub Form_Load()
         End If
     End If
     CallText.Text = Trim(rec.Fields(7))
-    db.Close
 End Sub
 
 Private Sub Label14_Click()
@@ -348,13 +345,13 @@ Private Sub Label8_Click()
 End Sub
 
 Private Sub Picture2_Click()
-    StudentInfoForm.Hide
+    SelfInfoForm.Hide
     MenuForm.Show
     Unload Me
 End Sub
 
 Private Sub Picture4_Click()
     PasswordChangeForm.Show
-    StudentInfoForm.Hide
+    SelfInfoForm.Hide
     Unload Me
 End Sub

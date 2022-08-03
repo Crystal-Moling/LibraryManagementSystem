@@ -134,12 +134,20 @@ Begin VB.Form StudentInfoForm
    End
    Begin VB.Frame Frame1 
       BackColor       =   &H00FFFFFF&
-      Caption         =   "学生信息"
+      Caption         =   "借阅者信息"
       Height          =   5655
       Left            =   120
       TabIndex        =   1
       Top             =   1440
       Width           =   6615
+      Begin VB.CheckBox Check1 
+         BackColor       =   &H00FFFFFF&
+         Height          =   255
+         Left            =   1560
+         TabIndex        =   29
+         Top             =   3360
+         Width           =   255
+      End
       Begin VB.TextBox NewStudentInfoText 
          Height          =   270
          Left            =   1200
@@ -215,6 +223,24 @@ Begin VB.Form StudentInfoForm
          TabIndex        =   4
          Top             =   960
          Width           =   1815
+      End
+      Begin VB.Label Label14 
+         BackStyle       =   0  'Transparent
+         Caption         =   "管理员权限："
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   240
+         TabIndex        =   28
+         Top             =   3360
+         Width           =   1095
       End
       Begin VB.Label Label12 
          BackStyle       =   0  'Transparent

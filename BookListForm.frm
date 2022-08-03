@@ -165,17 +165,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim db As ADODB.Connection
 Private Sub Form_Load()
     Move 0, 0
-    Set db = New ADODB.Connection
     MSHFlexGrid1.Cols = 11
-    db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getBookListSQL = "SELECT * FROM Õº È±Ì"
-    Set rec = New ADODB.Recordset
-    rec.CursorLocation = adUseClient
-    rec.Open Trim(getBookListSQL), db
-    Set ExecuteSQL = rec
+    Set rec = SQL.Execute(getBookListSQL)
     For i = 1 To rec.RecordCount
         MSHFlexGrid1.Rows = MSHFlexGrid1.Rows + 1
         For j = 0 To 10
@@ -192,6 +186,5 @@ End Sub
 Private Sub Picture2_Click()
     BookListForm.Hide
     MenuForm.Show
-    db.Close
     Unload Me
 End Sub
