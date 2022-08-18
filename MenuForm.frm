@@ -401,7 +401,8 @@ End Sub
     '' Books list
     
         Private Sub BooksList_Click()
-        
+         BookSelectForm.Show
+         MenuForm.Hide
         End Sub
         Private Sub Label8_Click()
             BooksList_Click

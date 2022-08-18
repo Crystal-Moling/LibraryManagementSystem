@@ -15,6 +15,7 @@ Form=PublisherForm.frm
 Object={0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0; MSHFLXGD.OCX
 Form=BookListForm.frm
 Module=SQL; SQL.bas
+Form=BookSelectForm.frm
 Startup="LoginForm"
 HelpFile=""
 ExeName32="图书借阅管理系统.exe"
