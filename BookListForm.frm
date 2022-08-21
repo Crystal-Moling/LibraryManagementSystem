@@ -21,6 +21,43 @@ Begin VB.Form BookListForm
       TabIndex        =   2
       Top             =   1440
       Width           =   2775
+      Begin VB.PictureBox Picture4 
+         BackColor       =   &H00FFFFFF&
+         Height          =   615
+         Left            =   0
+         ScaleHeight     =   555
+         ScaleWidth      =   2715
+         TabIndex        =   9
+         Top             =   1440
+         Width           =   2775
+         Begin VB.Label Label2 
+            BackStyle       =   0  'Transparent
+            Caption         =   "Õº ÈπÈªπ"
+            BeginProperty Font 
+               Name            =   "ÀŒÃÂ"
+               Size            =   15.75
+               Charset         =   134
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   600
+            TabIndex        =   10
+            Top             =   120
+            Width           =   1335
+         End
+         Begin VB.Shape Shape4 
+            BackColor       =   &H00000000&
+            BackStyle       =   1  'Opaque
+            Height          =   375
+            Left            =   120
+            Shape           =   4  'Rounded Rectangle
+            Top             =   120
+            Width           =   375
+         End
+      End
       Begin VB.PictureBox Picture2 
          BackColor       =   &H00FFFFFF&
          Height          =   615
@@ -28,7 +65,7 @@ Begin VB.Form BookListForm
          ScaleHeight     =   555
          ScaleWidth      =   2715
          TabIndex        =   7
-         Top             =   1440
+         Top             =   2040
          Width           =   2775
          Begin VB.Shape Shape2 
             BackColor       =   &H00000000&
@@ -179,6 +216,10 @@ Private Sub Form_Load()
     Next i
 End Sub
 
+Private Sub Label2_Click()
+    Picture4_Click
+End Sub
+
 Private Sub Label8_Click()
     Picture2_Click
 End Sub
@@ -186,5 +227,11 @@ End Sub
 Private Sub Picture2_Click()
     BookListForm.Hide
     MenuForm.Show
+    Unload Me
+End Sub
+
+Private Sub Picture4_Click()
+    BookListForm.Hide
+    ReturnBookList.Show
     Unload Me
 End Sub

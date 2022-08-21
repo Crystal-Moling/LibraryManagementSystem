@@ -12,7 +12,7 @@ Begin VB.Form MenuForm
    ScaleHeight     =   7215
    ScaleWidth      =   9765
    ShowInTaskbar   =   0   'False
-   Begin VB.PictureBox ReturnBook 
+   Begin VB.PictureBox BorrowedBook 
       BackColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   3120
@@ -35,7 +35,7 @@ Begin VB.Form MenuForm
          Appearance      =   0  'Flat
          BackColor       =   &H80000005&
          BackStyle       =   0  'Transparent
-         Caption         =   "图书归还"
+         Caption         =   "已借阅图书"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   21.75
@@ -50,7 +50,7 @@ Begin VB.Form MenuForm
          Left            =   840
          TabIndex        =   15
          Top             =   120
-         Width           =   1815
+         Width           =   2295
       End
    End
    Begin VB.PictureBox BooksList 
@@ -328,7 +328,7 @@ Private Sub Form_Load()
     If LoginUserPermission Then
         PersonalInfo.Visible = False
         BooksList.Visible = False
-        ReturnBook.Visible = False
+        BorrowedBook.Visible = False
         
         ReaderInfo.Visible = True
         BooksInfo.Visible = True
@@ -336,7 +336,7 @@ Private Sub Form_Load()
     Else
         PersonalInfo.Visible = True
         BooksList.Visible = True
-        ReturnBook.Visible = True
+        BorrowedBook.Visible = True
         
         ReaderInfo.Visible = False
         BooksInfo.Visible = False
@@ -389,20 +389,21 @@ End Sub
             PersonalInfo_Click
         End Sub
     
-    '' Return book
+    '' Borrowed book
     
-        Private Sub ReturnBook_Click()
-        
+        Private Sub BorrowedBook_Click()
+            BorrowedBooksForm.Show
+            MenuForm.Hide
         End Sub
         Private Sub Label9_Click()
-            ReturnBook_Click
+            BorrowedBook_Click
         End Sub
     
     '' Books list
     
         Private Sub BooksList_Click()
-         BookSelectForm.Show
-         MenuForm.Hide
+            BookSelectForm.Show
+            MenuForm.Hide
         End Sub
         Private Sub Label8_Click()
             BooksList_Click

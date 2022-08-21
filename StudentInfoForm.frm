@@ -421,11 +421,8 @@ Private Sub Form_Load()
     For i = 1 To 12
         SignMonth.AddItem i
     Next i
-    Set db = New ADODB.Connection
-    db.Open ("provider=microsoft.jet.oledb.4.0;data source=.\data.mdb ")
     getNumberSQL = "SELECT 学生编号 FROM 借阅者表 WHERE 管理员 <> True"
-    Set rec = New ADODB.Recordset
-    rec.Open Trim(getNumberSQL), db
+    Set rec = SQL.Execute(getNumberSQL)
     Set ExecuteSQL = rec
     While Not rec.EOF
         StudentNumberCombo.AddItem (Trim(rec.Fields(0)))
@@ -473,7 +470,6 @@ Private Sub Picture2_Click()
     Else
         StudentInfoForm.Hide
         MenuForm.Show
-        db.Close
         Unload Me
     End If
 End Sub
